@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Réminiscence</title>
+  <style>
+    /* Effet général effrayant */
+    body {
+      background: #000; /* Noir total */
+      color: #ff0000; /* Rouge sinistre */
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding-top: 15vh;
+      overflow: hidden;
+    }
+
+    /* Texte principal */
+    h1 {
+      font-size: 3em;
+      text-shadow: 0 0 10px crimson, 0 0 20px red;
+      animation: flicker 3s infinite;
+    }
+
+    /* Style vidéo */
+    video {
+      max-width: 80vw;
+      height: auto;
+      border: 5px solid crimson;
+      box-shadow: 0 0 20px crimson, 0 0 30px red;
+    }
+
+    /* Log d'interaction */
+    .log {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: crimson;
+      font-size: 1.2em;
+      padding: 10px 25px;
+      border: 2px solid crimson;
+      border-radius: 10px;
+      font-family: monospace;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      pointer-events: none;
+      z-index: 999;
+      box-shadow: 0 0 10px crimson;
+    }
+
+    /* Effet de glitch */
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px 0 #ff0000, -2px -2px 0 #00ff00, 0 0 15px #ff0000; }
+      50% { text-shadow: -2px -2px 0 #ff0000, 2px 2px 0 #00ff00, 0 0 15px #ff0000; }
+      100% { text-shadow: 2px -2px 0 #ff0000, -2px 2px 0 #00ff00, 0 0 15px #ff0000; }
+    }
+
+    /* Effet de clignotement */
+    @keyframes flicker {
+      0%, 22%, 36%, 75% { opacity: 1; }
+      28%, 33%, 82%, 97% { opacity: 0.4; }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="glitch">Tu te rappelles maintenant.</h1>
+  <video controls autoplay muted loop>
+    <source src="Meat-1.mp4" type="video/mp4">
+    Ton navigateur ne supporte pas la vidéo.
+  </video>
+
+  <div id="interaction-log" class="log">Patient 017 a utilisé une interaction</div>
+
+  <script>
+    const log = document.getElementById('interaction-log');
+
+    // Affiche une notification temporaire lors des clics
+    document.addEventListener('click', () => {
+      log.style.opacity = '1';
+      clearTimeout(log._timeout);
+      log._timeout = setTimeout(() => {
+        log.style.opacity = '0';
+      }, 2000);
+    });
+
+    // Ajoute un effet sonore effrayant au clic
+    document.addEventListener('click', () => {
+      const audio = new Audio('creepy_sound.mp3'); // Assurez-vous de disposer d'un fichier audio "creepy_sound.mp3".
+      audio.volume = 0.3; // Volume réduit pour ne pas trop effrayer.
+      audio.play();
+    });
+  </script>
+</body>
+</html>
